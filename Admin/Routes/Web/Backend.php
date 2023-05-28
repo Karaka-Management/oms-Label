@@ -8,12 +8,12 @@ use phpOMS\Router\RouteVerb;
 return [
     '^.*/controlling/budget/dashboard.*$' => [
         [
-            'dest' => '\Modules\Labeling\Controller\BackendController:viewBudgetingDashboard',
-            'verb' => RouteVerb::GET,
+            'dest'       => '\Modules\Labeling\Controller\BackendController:viewBudgetingDashboard',
+            'verb'       => RouteVerb::GET,
             'permission' => [
                 'module' => BackendController::MODULE_NAME,
-                'type'  => PermissionType::READ,
-                'state' => PermissionState::LABEL,
+                'type'   => PermissionType::READ,
+                'state'  => PermissionState::LABEL,
             ],
         ],
     ],

@@ -14,11 +14,6 @@ declare(strict_types=1);
 
 namespace Modules\Labeling\Controller;
 
-use phpOMS\Contract\RenderableInterface;
-use phpOMS\Message\RequestAbstract;
-use phpOMS\Message\ResponseAbstract;
-use phpOMS\Views\View;
-
 /**
  * Budgeting controller class.
  *
@@ -29,5 +24,4 @@ use phpOMS\Views\View;
  */
 final class BackendController extends Controller
 {
-
 }
