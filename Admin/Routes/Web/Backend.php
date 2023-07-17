@@ -6,9 +6,9 @@ use phpOMS\Account\PermissionType;
 use phpOMS\Router\RouteVerb;
 
 return [
-    '^.*/controlling/budget/dashboard.*$' => [
+    '^.*/warehouse/labeling/label/list.*$' => [
         [
-            'dest'       => '\Modules\Labeling\Controller\BackendController:viewBudgetingDashboard',
+            'dest'       => '\Modules\Labeling\Controller\BackendController:viewLabelLayoutList',
             'verb'       => RouteVerb::GET,
             'permission' => [
                 'module' => BackendController::MODULE_NAME,

@@ -1,0 +1,12 @@
+[
+    {
+        "type": "layout",
+        "files": [
+            "/Modules/Labeling/Admin/Install/Media/layout01.php"
+        ],
+        "l11n": {
+			"en": "Default 01",
+			"de": "Standard 01"
+		}
+    }
+]

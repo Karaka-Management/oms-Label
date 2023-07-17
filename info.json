@@ -17,9 +17,13 @@
     "description": "Labeling module.",
     "directory": "Labeling",
     "dependencies": {
-        "Controlling": "*"
+        "Admin": "*",
+        "ItemManagement": "*",
+        "WarehouseManagement": "*"
     },
     "providing": {
+        "Admin": "*",
+        "Media": "*",
         "Navigation": "*"
     },
     "load": [
