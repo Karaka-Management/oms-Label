@@ -13,7 +13,7 @@ $l = new Label();
 
 // top
 $text = new Text();
-$text->text = 'Product Name';
+$text->text = $item->getL11n('name1')->content;
 $text->size = 80;
 $text->x = $margin;
 $text->y = 80 + $margin;
@@ -21,7 +21,7 @@ $l->elements[] = $text;
 
 // sub
 $text = new Text();
-$text->text = 'Second Product Name';
+$text->text = $item->getL11n('name2')->content;
 $text->size = 50;
 $text->x = $margin;
 $text->y = 170 + $margin;

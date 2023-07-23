@@ -6,9 +6,31 @@ use phpOMS\Account\PermissionType;
 use phpOMS\Router\RouteVerb;
 
 return [
-    '^.*/warehouse/labeling/label/list.*$' => [
+    '^.*/warehouse/labeling/item/list.*$' => [
         [
-            'dest'       => '\Modules\Labeling\Controller\BackendController:viewLabelLayoutList',
+            'dest'       => '\Modules\Labeling\Controller\BackendController:viewItemList',
+            'verb'       => RouteVerb::GET,
+            'permission' => [
+                'module' => BackendController::MODULE_NAME,
+                'type'   => PermissionType::READ,
+                'state'  => PermissionState::LABEL,
+            ],
+        ],
+    ],
+    '^.*/warehouse/labeling/item\?.*$' => [
+        [
+            'dest'       => '\Modules\Labeling\Controller\BackendController:viewItem',
+            'verb'       => RouteVerb::GET,
+            'permission' => [
+                'module' => BackendController::MODULE_NAME,
+                'type'   => PermissionType::READ,
+                'state'  => PermissionState::LABEL,
+            ],
+        ],
+    ],
+    '^.*/warehouse/labeling/layout/list.*$' => [
+        [
+            'dest'       => '\Modules\Labeling\Controller\BackendController:viewItemLabelList',
             'verb'       => RouteVerb::GET,
             'permission' => [
                 'module' => BackendController::MODULE_NAME,
