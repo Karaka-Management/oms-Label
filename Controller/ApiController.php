@@ -23,10 +23,8 @@ use Modules\Media\Models\CollectionMapper;
 use phpOMS\Localization\BaseStringL11n;
 use phpOMS\Localization\ISO639x1Enum;
 use phpOMS\Message\Http\RequestStatusCode;
-use phpOMS\Message\NotificationLevel;
 use phpOMS\Message\RequestAbstract;
 use phpOMS\Message\ResponseAbstract;
-use phpOMS\Model\Message\FormValidation;
 
 /**
  * Labeling class.
@@ -54,16 +52,15 @@ final class ApiController extends Controller
     public function apiLabelLayoutCreate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
     {
         if (!empty($val = $this->validateLabelLayoutCreate($request))) {
-            $response->data['layout_create'] = new FormValidation($val);
-            $response->header->status      = RequestStatusCode::R_400;
+            $response->header->status = RequestStatusCode::R_400;
+            $this->createInvalidCreateResponse($request, $response, $val);
 
             return;
         }
 
         $layout = $this->createLabelLayoutFromRequest($request);
         $this->createModel($request->header->account, $layout, LabelLayoutMapper::class, 'layout', $request->getOrigin());
-
-        $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'LabelLayout', 'LabelLayout successfully created', $layout);
+        $this->createStandardCreateResponse($request, $response, $layout);
     }
 
     /**
@@ -158,15 +155,15 @@ final class ApiController extends Controller
     public function apiLabelLayoutL11nCreate(RequestAbstract $request, ResponseAbstract $response, mixed $data = null) : void
     {
         if (!empty($val = $this->validateLabelLayoutL11nCreate($request))) {
-            $response->data['label_layout_l11n_create'] = new FormValidation($val);
-            $response->header->status                = RequestStatusCode::R_400;
+            $response->header->status = RequestStatusCode::R_400;
+            $this->createInvalidCreateResponse($request, $response, $val);
 
             return;
         }
 
         $labelLayoutL11n = $this->createLabelLayoutL11nFromRequest($request);
         $this->createModel($request->header->account, $labelLayoutL11n, LabelLayoutL11nMapper::class, 'label_layout_l11n', $request->getOrigin());
-        $this->fillJsonResponse($request, $response, NotificationLevel::OK, 'Localization', 'Localization successfully created', $labelLayoutL11n);
+        $this->createStandardCreateResponse($request, $response, $labelLayoutL11n);
     }
 
     /**
