@@ -73,9 +73,7 @@ class Label
                         );
                     }
                 } elseif ($element->type === 3) {
-
                 } elseif ($element->type === 4) {
-
                 }
             } elseif ($element instanceof Text) {
                 \imagettftext($im, $element->size, 0, $element->x, $element->y, $color, $element->font, $element->text);
@@ -117,7 +115,6 @@ class Label
                     $in = $newIn;
                 }
 
-
                 $cut = \imagecreatetruecolor($srcW, $srcH);
 
                 \imagecopy($cut, $im, 0, 0, $element->x, $element->y, $srcW, $srcH);
@@ -133,7 +130,6 @@ class Label
                 \imagedestroy($in);
                 \imagedestroy($cut);
             } else {
-
             }
         }
 

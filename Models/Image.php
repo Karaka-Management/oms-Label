@@ -17,13 +17,18 @@ namespace Modules\Labeling\Models;
 class Image
 {
     public int $x = 0;
+
     public int $y = 0;
 
     public float $ratio = 0.0;
+
     public int $x2 = 0;
+
     public int $y2 = 0;
 
     public string $src = '';
+
     public $resource = null;
+
     public int $color = 0;
 }

@@ -16,18 +16,18 @@ echo $this->data['nav']->render();
 
 $layout = \reset($this->data['layouts']);
 
-$media = $layout->template;
+$media    = $layout->template;
 $template = \reset($media->sources);
 
 $item = $this->data['item'];
 
 $layout = include_once $template->getAbsolutePath();
 
-ob_start();
+\ob_start();
 \imagepng($layout->render());
-$imageData = ob_get_clean();
+$imageData = \ob_get_clean();
 
-$imageBase64 = base64_encode($imageData);
+$imageBase64 = \base64_encode($imageData);
 // Get the image MIME type
 $imageType = 'image/png'; // Assuming JPEG format in this example
 

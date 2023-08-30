@@ -20,9 +20,7 @@ use phpOMS\Message\Http\HttpRequest;
 use phpOMS\Message\Http\HttpResponse;
 use phpOMS\Module\InstallerAbstract;
 use phpOMS\Module\ModuleInfo;
-use phpOMS\System\MimeType;
 use phpOMS\Uri\HttpUri;
-use phpOMS\Utils\TestUtils;
 
 /**
  * Installer class.
@@ -67,7 +65,7 @@ final class Installer extends InstallerAbstract
     /**
      * Install default bill types
      *
-     * @param ApplicationAbstract $app       Application
+     * @param ApplicationAbstract $app     Application
      * @param array               $layouts Default layouts
      *
      * @return array

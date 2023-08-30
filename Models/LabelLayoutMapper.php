@@ -38,7 +38,7 @@ final class LabelLayoutMapper extends DataMapperFactory
      */
     public const COLUMNS = [
         'labeling_layout_id'                     => ['name' => 'labeling_layout_id',             'type' => 'int',    'internal' => 'id'],
-        'labeling_layout_template'       => ['name' => 'labeling_layout_template',  'type' => 'int',    'internal' => 'template'],
+        'labeling_layout_template'               => ['name' => 'labeling_layout_template',  'type' => 'int',    'internal' => 'template'],
     ];
 
     /**

@@ -16,9 +16,9 @@ declare(strict_types=1);
 
 namespace Modules\Labeling\Controller;
 
-use Modules\Labeling\Models\LabelLayoutMapper;
 use Modules\Labeling\Models\LabelLayout;
 use Modules\Labeling\Models\LabelLayoutL11nMapper;
+use Modules\Labeling\Models\LabelLayoutMapper;
 use Modules\Media\Models\CollectionMapper;
 use phpOMS\Localization\BaseStringL11n;
 use phpOMS\Localization\ISO639x1Enum;
@@ -97,7 +97,7 @@ final class ApiController extends Controller
         $labelLayout = new LabelLayout();
         $labelLayout->setL11n($request->getDataString('title') ?? '', $request->getDataString('language') ?? ISO639x1Enum::_EN);
 
-        $path = '/Modules/Labeling/Templates/' . $request->getDataString('title');
+        $path          = '/Modules/Labeling/Templates/' . $request->getDataString('title');
         $uploadedFiles = $request->files;
 
         $uploaded = $this->app->moduleManager->get('Media')->uploadFiles(

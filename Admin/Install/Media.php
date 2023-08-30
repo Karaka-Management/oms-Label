@@ -14,7 +14,6 @@ declare(strict_types=1);
 
 namespace Modules\Labeling\Admin\Install;
 
-use Modules\Labeling\Models\SettingsEnum;
 use phpOMS\Application\ApplicationAbstract;
 
 /**

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 $layout   = $this->data['layout'];
 $template = \reset($layout->template->sources);

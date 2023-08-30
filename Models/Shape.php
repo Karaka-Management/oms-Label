@@ -17,13 +17,17 @@ namespace Modules\Labeling\Models;
 class Shape
 {
     public int $x = 0;
+
     public int $y = 0;
+
     public int $x2 = 0;
+
     public int $y2 = 0;
 
     public int $type = ShapeType::RECTANGLE;
 
     public int $color = 0;
+
     public int $borderThickness = 1;
 
     public int $fillColor = -1;
