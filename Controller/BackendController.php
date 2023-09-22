@@ -49,7 +49,7 @@ final class BackendController extends Controller
         $view->setTemplate('/Modules/Labeling/Theme/Backend/layout-list');
         $view->data['nav'] = $this->app->moduleManager->get('Navigation')->createNavigationMid(1005701001, $request, $response);
 
-        /** @var \Modules\Attribute\Models\AttributeType[] $attributes */
+        /** @var \Modules\Labeling\Models\LabelLayout[] $layouts */
         $layouts = LabelLayoutMapper::getAll()
             ->with('l11n')
             ->with('template')
@@ -125,15 +125,16 @@ final class BackendController extends Controller
 
         $view->data['item'] = $item;
 
-        /** @var \Modules\Attribute\Models\AttributeType[] $attributes */
-        $layouts = LabelLayoutMapper::getAll()
+        /** @var \Modules\Labeling\Models\LabelLayout[] $layout */
+        $layout = LabelLayoutMapper::get()
             ->with('l11n')
             ->with('template')
             ->with('template/sources')
             ->where('l11n/language', $response->header->l11n->language)
+            ->where('id', (int) $request->getData('id'))
             ->execute();
 
-        $view->data['layouts'] = $layouts;
+        $view->data['layout'] = $layout;
 
         return $view;
     }

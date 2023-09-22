@@ -26,10 +26,18 @@ class Label
 
     public array $elements = [];
 
-    public function render()
+    public function render() : ?\GdImage
     {
         $im = \imagecreatetruecolor((int) (37.8 * $this->width), (int) (37.8 * $this->height));
+        if ($im === false) {
+            return null;
+        }
+
         $bg = \imagecolorallocatealpha($im, 255, 255, 255, 0);
+        if ($bg === false) {
+            return null;
+        }
+
         \imagefill($im, 0, 0, $bg);
 
         /*
@@ -79,6 +87,9 @@ class Label
                 \imagettftext($im, $element->size, 0, $element->x, $element->y, $color, $element->font, $element->text);
             } elseif ($element instanceof Image) {
                 $in = $element->resource === null ? \imagecreatefrompng(__DIR__ . '/../../..' . $element->src) : $element->resource;
+                if ($in === false) {
+                    return null;
+                }
 
                 $srcW = \imagesx($in);
                 $srcH = \imagesy($in);
@@ -95,6 +106,10 @@ class Label
                     $newH = (int) ($srcH * $ratio);
 
                     $newIn = \imagecreatetruecolor($newW, $newH);
+                    if ($newIn === false) {
+                        return null;
+                    }
+
                     \imagecolortransparent($newIn, \imagecolorallocatealpha($newIn, 0, 0, 0, 127));
                     \imagealphablending($newIn, false);
                     \imagesavealpha($newIn, true);

@@ -28,7 +28,7 @@ class Image
 
     public string $src = '';
 
-    public $resource = null;
+    public ?\GdImage $resource = null;
 
     public int $color = 0;
 }

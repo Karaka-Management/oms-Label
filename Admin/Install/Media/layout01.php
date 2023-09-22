@@ -11,6 +11,8 @@ $margin = 50;
 
 $l = new Label();
 
+/** @var \Modules\ItemManagement\Models\Item $item */
+
 // top
 $text          = new Text();
 $text->text    = $item->getL11n('name1')->content;

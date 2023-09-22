@@ -47,13 +47,13 @@ final class Installer extends InstallerAbstract
     {
         parent::install($app, $info, $cfgHandler);
 
-        /* Bill types */
+        /* Label layouts */
         $fileContent = \file_get_contents(__DIR__ . '/Install/layouts.json');
         if ($fileContent === false) {
             return;
         }
 
-        /** @var array $types */
+        /** @var array $layouts */
         $layouts = \json_decode($fileContent, true);
         if ($layouts === false) {
             return;
