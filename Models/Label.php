@@ -14,6 +14,14 @@ declare(strict_types=1);
 
 namespace Modules\Labeling\Models;
 
+/**
+ * Label.
+ *
+ * @package Modules\Labeling\Models
+ * @license OMS License 2.0
+ * @link    https://jingga.app
+ * @since   1.0.0
+ */
 class Label
 {
     public int $width = 50;
@@ -144,7 +152,6 @@ class Label
 
                 \imagedestroy($in);
                 \imagedestroy($cut);
-            } else {
             }
         }
 

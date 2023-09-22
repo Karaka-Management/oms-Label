@@ -14,6 +14,14 @@ declare(strict_types=1);
 
 namespace Modules\Labeling\Models;
 
+/**
+ * Image.
+ *
+ * @package Modules\Labeling\Models
+ * @license OMS License 2.0
+ * @link    https://jingga.app
+ * @since   1.0.0
+ */
 class Image
 {
     public int $x = 0;

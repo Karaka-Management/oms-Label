@@ -1,4 +1,16 @@
-<?php declare(strict_types=1);
+<?php
+/**
+ * Jingga
+ *
+ * PHP Version 8.1
+ *
+ * @package   Modules\Labeling
+ * @copyright Dennis Eichhorn
+ * @license   OMS License 2.0
+ * @version   1.0.0
+ * @link      https://jingga.app
+ */
+declare(strict_types=1);
 
 use Modules\Labeling\Models\Image;
 use Modules\Labeling\Models\Label;

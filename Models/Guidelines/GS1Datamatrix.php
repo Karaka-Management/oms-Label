@@ -16,6 +16,14 @@ declare(strict_types=1);
 
 namespace Modules\Labeling\Models\Guidelines;
 
+/**
+ * GS1 Datamatrix.
+ *
+ * @package Modules\Labeling\Models
+ * @license OMS License 2.0
+ * @link    https://jingga.app
+ * @since   1.0.0
+ */
 class GS1Datamatrix
 {
     private const DEFINITIONS = [
