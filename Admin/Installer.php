@@ -109,9 +109,9 @@ final class Installer extends InstallerAbstract
                 continue;
             }
 
-            $layoutModel = !\is_array($responseData['response'])
-                ? $responseData['response']->toArray()
-                : $responseData['response'];
+            $layoutModel = \is_array($responseData['response'])
+                ? $responseData['response']
+                : $responseData['response']->toArray();
 
             $layoutModels[] = $layoutModel;
 
