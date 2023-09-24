@@ -126,7 +126,12 @@ class Label
                         return null;
                     }
 
-                    \imagecolortransparent($newIn, \imagecolorallocatealpha($newIn, 0, 0, 0, 127));
+                    $transparency = \imagecolorallocatealpha($newIn, 0, 0, 0, 127);
+                    if ($transparency === false) {
+                        return null;
+                    }
+
+                    \imagecolortransparent($newIn, $transparency);
                     \imagealphablending($newIn, false);
                     \imagesavealpha($newIn, true);
 
@@ -147,6 +152,9 @@ class Label
                 }
 
                 $cut = \imagecreatetruecolor($srcW, $srcH);
+                if ($cut === false) {
+                    return null;
+                }
 
                 \imagecopy($cut, $im, 0, 0, $element->x, $element->y, $srcW, $srcH);
                 \imagecopy($cut, $in, 0, 0, 0, 0, $srcW, $srcH);
