@@ -34,6 +34,13 @@ class Label
 
     public array $elements = [];
 
+    /**
+     * Render label
+     *
+     * @return null|\GdImage
+     *
+     * @since 1.0.0
+     */
     public function render() : ?\GdImage
     {
         $im = \imagecreatetruecolor((int) (37.8 * $this->width), (int) (37.8 * $this->height));
@@ -58,6 +65,7 @@ class Label
         foreach ($this->elements as $element) {
             $color = 0;
 
+            // @todo: replace int type with enum
             if ($element instanceof Shape) {
                 if ($element->type === 1) {
                     // Line
@@ -88,9 +96,9 @@ class Label
                             $bg
                         );
                     }
-                } elseif ($element->type === 3) {
-                } elseif ($element->type === 4) {
                 }
+
+                // @todo: implement circle + elipse
             } elseif ($element instanceof Text) {
                 \imagettftext($im, $element->size, 0, $element->x, $element->y, $color, $element->font, $element->text);
             } elseif ($element instanceof Image) {

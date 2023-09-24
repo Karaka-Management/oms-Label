@@ -550,6 +550,13 @@ class GS1Datamatrix
 
     public array $data = [];
 
+    /**
+     * Validate GS1 data
+     *
+     * @return bool
+     *
+     * @since 1.0.0
+     */
     public function validate() : bool
     {
         if (empty($this->data['01'] ?? '')) {
@@ -565,6 +572,13 @@ class GS1Datamatrix
         return true;
     }
 
+    /**
+     * Render GS1 string representation
+     *
+     * @return string
+     *
+     * @since 1.0.0
+     */
     public function renderString() : string
     {
         $text = '';
@@ -576,6 +590,13 @@ class GS1Datamatrix
         return $text;
     }
 
+    /**
+     * Render internal GS1 string used for datamatrix etc.
+     *
+     * @return string
+     *
+     * @since 1.0.0
+     */
     public function renderCodeString() : string
     {
         // 232 = FNC1 = ]C1
