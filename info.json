@@ -29,7 +29,7 @@
     "load": [
         {
             "pid": [
-                "/warehouse/stocktaking"
+                "/warehouse/labeling"
             ],
             "type": 4,
             "for": 0,
