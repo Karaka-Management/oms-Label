@@ -1,9 +1,9 @@
-name: Compress images
+name: Image optimization
 
 on: [push, pull_request]
 
 jobs:
-  general_module_workflow:
+  general_image_workflow:
     uses: Karaka-Management/Karaka/.github/workflows/image.yml@develop
     secrets:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
