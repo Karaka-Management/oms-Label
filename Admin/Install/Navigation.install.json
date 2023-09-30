@@ -1,0 +1,48 @@
+[
+    {
+        "id": 1005701001,
+        "pid": "/",
+        "type": 2,
+        "subtype": 1,
+        "name": "Labeling",
+        "uri": "{/base}/warehouse/labeling/item/list?{?}",
+        "target": "self",
+        "icon": null,
+        "order": 1,
+        "from": "Labeling",
+        "permission": { "permission": 2, "type": null, "element": null },
+        "parent": 1001301001,
+        "children": [
+            {
+                "id": 1005702001,
+                "pid": "/warehouse/labeling",
+                "type": 3,
+                "subtype": 1,
+                "name": "Items",
+                "uri": "{/base}/warehouse/labeling/item/list?{?}",
+                "target": "self",
+                "icon": null,
+                "order": 1,
+                "from": "Labeling",
+                "permission": { "permission": 2, "type": null, "element": null },
+                "parent": 1005701001,
+                "children": []
+            },
+            {
+                "id": 1005703001,
+                "pid": "/warehouse/labeling",
+                "type": 3,
+                "subtype": 5,
+                "name": "Layouts",
+                "uri": "{/base}/warehouse/labeling/layout/list?{?}",
+                "target": "self",
+                "icon": null,
+                "order": 1,
+                "from": "Labeling",
+                "permission": { "permission": 2, "type": null, "element": null },
+                "parent": 1005701001,
+                "children": []
+            }
+        ]
+    }
+]

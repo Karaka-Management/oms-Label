@@ -1,0 +1,80 @@
+{
+    "labeling_layout": {
+        "name": "labeling_layout",
+        "fields": {
+            "labeling_layout_id": {
+                "name": "labeling_layout_id",
+                "type": "INT",
+                "null": false,
+                "primary": true,
+                "autoincrement": true
+            },
+            "labeling_layout_template": {
+                "name": "labeling_layout_template",
+                "type": "INT",
+                "null": true,
+                "default": null,
+                "foreignTable": "media",
+                "foreignKey": "media_id"
+            }
+        }
+    },
+    "labeling_layout_l11n": {
+        "name": "labeling_layout_l11n",
+        "fields": {
+            "labeling_layout_l11n_id": {
+                "name": "labeling_layout_l11n_id",
+                "type": "INT",
+                "null": false,
+                "primary": true,
+                "autoincrement": true
+            },
+            "labeling_layout_l11n_name": {
+                "name": "labeling_layout_l11n_name",
+                "type": "VARCHAR(255)",
+                "null": false
+            },
+            "labeling_layout_l11n_type": {
+                "name": "labeling_layout_l11n_type",
+                "type": "INT",
+                "null": false,
+                "foreignTable": "labeling_layout",
+                "foreignKey": "labeling_layout_id"
+            },
+            "labeling_layout_l11n_language": {
+                "name": "labeling_layout_l11n_language",
+                "type": "VARCHAR(2)",
+                "default": null,
+                "null": true,
+                "foreignTable": "language",
+                "foreignKey": "language_639_1"
+            }
+        }
+    },
+    "labeling_layout_item": {
+        "name": "labeling_layout_item",
+        "fields": {
+            "labeling_layout_item_id": {
+                "name": "labeling_layout_item_id",
+                "type": "INT",
+                "null": false,
+                "primary": true,
+                "autoincrement": true
+            },
+            "labeling_layout_item_src": {
+                "name": "labeling_layout_item_src",
+                "type": "INT",
+                "null": false,
+                "foreignTable": "labeling_layout",
+                "foreignKey": "labeling_layout_id"
+            },
+            "labeling_layout_item_dst": {
+                "name": "labeling_layout_item_dst",
+                "type": "INT",
+                "null": false,
+                "foreignTable": "itemmgmt_item",
+                "foreignKey": "itemmgmt_item_id"
+            }
+        }
+    }
+}

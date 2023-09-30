@@ -1,0 +1,23 @@
+[
+    {
+        "type": "collection",
+        "create_directory": true,
+        "name": "Labeling",
+        "virtualPath": "/Modules",
+        "user": 1
+    },
+    {
+        "type": "collection",
+        "create_directory": true,
+        "name": "Templates",
+        "virtualPath": "/Modules/Labeling",
+        "user": 1
+    },
+    {
+        "type": "collection",
+        "create_directory": true,
+        "name": "Default",
+        "virtualPath": "/Modules/Billing",
+        "user": 1
+    }
+]
