@@ -8,7 +8,7 @@
  * @copyright Dennis Eichhorn
  * @license   OMS License 2.0
  * @version   1.0.0
- * @link      https://orange-management.org
+ * @link      https://jingga.app
  */
 declare(strict_types=1);
 
@@ -27,7 +27,7 @@ use phpOMS\Uri\HttpUri;
  *
  * @package Modules\Labeling\Admin
  * @license OMS License 2.0
- * @link    https://orange-management.org
+ * @link    https://jingga.app
  * @since   1.0.0
  */
 final class Installer extends InstallerAbstract
@@ -104,7 +104,7 @@ final class Installer extends InstallerAbstract
 
             $module->apiLabelLayoutCreate($request, $response);
 
-            $responseData = $response->get('');
+            $responseData = $response->getData('');
             if (!\is_array($responseData)) {
                 continue;
             }

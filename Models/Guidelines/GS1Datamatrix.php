@@ -8,7 +8,7 @@
  * @copyright Dennis Eichhorn
  * @license   OMS License 2.0
  * @version   1.0.0
- * @link      https://orange-management.org
+ * @link      https://jingga.app
  * @see       https://www.gs1.org/standards/gs1-datamatrix-guideline/25#2-Encoding-data+2-2-GS1-element-strings
  * @see       https://www.gs1.org/standards/barcodes/application-identifiers
  */
