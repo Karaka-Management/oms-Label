@@ -67,8 +67,7 @@ class Label
 
             // @todo: replace int type with enum
             if ($element instanceof Shape) {
-                if ($element->type === 1) {
-                    // Line
+                if ($element->type === ShapeType::LINE) {
                     if ($element->borderThickness === 1) {
                         \imageline($im, $element->x, $element->y, $element->x2, $element->y2, $color);
                     } else {
@@ -79,8 +78,7 @@ class Label
                             $color
                         );
                     }
-                } elseif ($element->type === 2) {
-                    // Rectangle
+                } elseif ($element->type === ShapeType::RECTANGLE) {
                     \imagefilledrectangle(
                         $im,
                         $element->x, $element->y,
@@ -96,9 +94,23 @@ class Label
                             $bg
                         );
                     }
+                } elseif ($element->type === ShapeType::ELLIPSE) {
+                    if ($element->fillColor === -1) {
+                        \imageellipse(
+                            $im,
+                            $element->x, $element->y,
+                            $element->x2, $element->y2,
+                            $bg
+                        );
+                    } else {
+                        \imagefilledellipse(
+                            $im,
+                            $element->x, $element->y,
+                            $element->x2, $element->y2,
+                            $bg
+                        );
+                    }
                 }
-
-                // @todo: implement circle + elipse
             } elseif ($element instanceof Text) {
                 \imagettftext($im, $element->size, 0, $element->x, $element->y, $color, $element->font, $element->text);
             } elseif ($element instanceof Image) {
@@ -107,27 +119,66 @@ class Label
                     return null;
                 }
 
+                \imagealphablending($in, false);
+                \imagesavealpha($in, true);
+
+                $transparency = \imagecolorallocatealpha($in, 0, 0, 0, 127);
+                if ($transparency === false) {
+                    return null;
+                }
+
                 $srcW = \imagesx($in);
                 $srcH = \imagesy($in);
 
-                // should resize
-                // @todo: impl. skewing
-                if ($element->ratio !== 0.0 || $element->x2 !== 0 || $element->y2 !== 0) {
-                    $ratio = $element->ratio;
-                    if ($ratio === 0.0) {
-                        $ratio = ($element->x2 - $element->x) / $srcW;
-                    }
+                // should crop
+                if ($element->x1 !== 0 || $element->x2 !== 0 || $element->y1 !== 0 || $element->y2 !== 0) {
+                    $cropped = \imagecrop($in, [
+                        'x' => $element->x1,
+                        'y' => $element->y1,
+                        'width' => $element->x2 === 0 ? $srcW - $element->x1 : $element->x2 - $element->x1,
+                        'height' => $element->y2 === 0 ? $srcH - $element->y1 : $element->y2 - $element->y1,
+                    ]);
 
-                    $newW = (int) ($srcW * $ratio);
-                    $newH = (int) ($srcH * $ratio);
-
-                    $newIn = \imagecreatetruecolor($newW, $newH);
+                    /*
+                    $newIn = \imagecreatetruecolor($crop['width'], $crop['height']);
                     if ($newIn === false) {
                         return null;
                     }
 
-                    $transparency = \imagecolorallocatealpha($newIn, 0, 0, 0, 127);
-                    if ($transparency === false) {
+                    \imagecolortransparent($newIn, $transparency);
+                    \imagealphablending($newIn, false);
+                    \imagesavealpha($newIn, true);
+
+                    \imagecopyresampled(
+                        $newIn, $cropped,
+                        0, 0,
+                        0, 0,
+                        $crop['width'], $crop['height'],
+                        $srcW, $srcH
+                    );
+
+                    $srcW = \imagesx($newIn);
+                    $srcH = \imagesy($newIn);
+                    */
+
+                    $srcW = \imagesx($cropped);
+                    $srcH = \imagesy($cropped);
+
+                    \imagedestroy($in);
+
+                    $in = $cropped;
+                }
+
+                // should resize
+                if ($element->ratio !== 0.0 || $element->width !== 0 || $element->height !== 0) {
+                    $ratioX = $element->ratio === 0.0 ? ($element->width - $element->x) / $srcW : $element->ratio;
+                    $ratioY = $element->ratio === 0.0 ? ($element->height - $element->y) / $srcH : $element->ratio;
+
+                    $newW = (int) ($srcW * $ratioX);
+                    $newH = (int) ($srcH * $ratioY);
+
+                    $newIn = \imagecreatetruecolor($newW, $newH);
+                    if ($newIn === false) {
                         return null;
                     }
 
@@ -149,6 +200,20 @@ class Label
                     \imagedestroy($in);
 
                     $in = $newIn;
+                }
+
+                // should rotate
+                if ($element->rotate !== 0.0) {
+                    $rotated = \imagerotate($in, $element->rotate, $transparency);
+                    \imagealphablending($rotated, false);
+                    \imagesavealpha($rotated, true);
+
+                    $srcW = \imagesx($rotated);
+                    $srcH = \imagesy($rotated);
+
+                    \imagedestroy($in);
+
+                    $in = $rotated;
                 }
 
                 $cut = \imagecreatetruecolor($srcW, $srcH);

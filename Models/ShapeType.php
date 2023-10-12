@@ -30,7 +30,7 @@ abstract class ShapeType extends Enum
 
     public const RECTANGLE = 2;
 
-    public const CIRCLE = 3;
+    public const ELLIPSE = 3;
 
     public const TRIANGLE = 4;
 }
