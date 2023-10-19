@@ -139,6 +139,10 @@ class Label
                         'height' => $element->y2 === 0 ? $srcH - $element->y1 : $element->y2 - $element->y1,
                     ]);
 
+                    if ($cropped === false) {
+                        return null;
+                    }
+
                     /*
                     $newIn = \imagecreatetruecolor($crop['width'], $crop['height']);
                     if ($newIn === false) {
