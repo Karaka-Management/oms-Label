@@ -114,7 +114,7 @@ final class ApiController extends Controller
             __DIR__ . '/../../../Modules/Media/Files' . $path
         );
 
-        // @todo: I think we need to add the uploaded files to the collection.
+        // @todo I think we need to add the uploaded files to the collection.
         // The frontend should work without it because of some "smart" corrections (virtualPath), but it is not correct.
         // In the db there should be a relationship defined, no?
         // If that is the case, maybe we also need to adjust the api. Either the uploadFiles should create the collection (if specified)

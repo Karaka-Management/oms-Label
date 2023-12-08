@@ -65,7 +65,7 @@ class Label
         foreach ($this->elements as $element) {
             $color = 0;
 
-            // @todo: replace int type with enum
+            // @todo replace int type with enum
             if ($element instanceof Shape) {
                 if ($element->type === ShapeType::LINE) {
                     if ($element->borderThickness === 1) {
