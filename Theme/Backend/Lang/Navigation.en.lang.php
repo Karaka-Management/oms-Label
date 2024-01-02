@@ -15,4 +15,6 @@ declare(strict_types=1);
 return ['Navigation' => [
     'Labeling' => 'Labeling',
     'List'     => 'List',
+    'Layouts'     => 'Layouts',
+    'Name'     => 'Name',
 ]];

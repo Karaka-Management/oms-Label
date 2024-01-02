@@ -15,4 +15,6 @@ declare(strict_types=1);
 return ['Navigation' => [
     'Labeling' => 'Etikettierung',
     'List'     => 'Liste',
+    'Layouts'     => 'Designs',
+    'Name'     => 'Name',
 ]];

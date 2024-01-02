@@ -28,6 +28,17 @@ return [
             ],
         ],
     ],
+    '^.*/warehouse/labeling/layout\?.*$' => [
+        [
+            'dest'       => '\Modules\Labeling\Controller\BackendController:viewLayout',
+            'verb'       => RouteVerb::GET,
+            'permission' => [
+                'module' => BackendController::MODULE_NAME,
+                'type'   => PermissionType::READ,
+                'state'  => PermissionState::LABEL,
+            ],
+        ],
+    ],
     '^.*/warehouse/labeling/layout/list.*$' => [
         [
             'dest'       => '\Modules\Labeling\Controller\BackendController:viewItemLabelList',

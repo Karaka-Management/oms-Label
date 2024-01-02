@@ -133,9 +133,9 @@ class Label
                 // should crop
                 if ($element->x1 !== 0 || $element->x2 !== 0 || $element->y1 !== 0 || $element->y2 !== 0) {
                     $cropped = \imagecrop($in, [
-                        'x' => $element->x1,
-                        'y' => $element->y1,
-                        'width' => $element->x2 === 0 ? $srcW - $element->x1 : $element->x2 - $element->x1,
+                        'x'      => $element->x1,
+                        'y'      => $element->y1,
+                        'width'  => $element->x2 === 0 ? $srcW - $element->x1 : $element->x2 - $element->x1,
                         'height' => $element->y2 === 0 ? $srcH - $element->y1 : $element->y2 - $element->y1,
                     ]);
 
@@ -175,8 +175,21 @@ class Label
 
                 // should resize
                 if ($element->ratio !== 0.0 || $element->width !== 0 || $element->height !== 0) {
-                    $ratioX = $element->ratio === 0.0 ? ($element->width - $element->x) / $srcW : $element->ratio;
-                    $ratioY = $element->ratio === 0.0 ? ($element->height - $element->y) / $srcH : $element->ratio;
+                    $ratioX = $element->ratio === 0.0 ? $element->width / $srcW : $element->ratio;
+                    $ratioY = $element->ratio === 0.0 ? $element->height / $srcH : $element->ratio;
+
+                    $ratioX = \abs($ratioX);
+                    $ratioY = \abs($ratioY);
+
+                    if ($ratioX === 0.0) {
+                        $ratioX = $ratioY;
+                    }
+
+                    if ($ratioY === 0.0) {
+                        $ratioY = $ratioX;
+                    }
+
+                    // @todo handle use original width or height but resize height or width.
 
                     $newW = (int) ($srcW * $ratioX);
                     $newH = (int) ($srcH * $ratioY);

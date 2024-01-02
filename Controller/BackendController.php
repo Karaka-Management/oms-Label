@@ -17,6 +17,7 @@ namespace Modules\Labeling\Controller;
 use Modules\ItemManagement\Models\ItemMapper;
 use Modules\Labeling\Models\LabelLayoutMapper;
 use phpOMS\Contract\RenderableInterface;
+use phpOMS\DataStorage\Database\Query\Builder;
 use phpOMS\Message\RequestAbstract;
 use phpOMS\Message\ResponseAbstract;
 use phpOMS\Views\View;
@@ -32,7 +33,7 @@ use phpOMS\Views\View;
 final class BackendController extends Controller
 {
     /**
-     * Routing end-point for application behaviour.
+     * Routing end-point for application behavior.
      *
      * @param RequestAbstract  $request  Request
      * @param ResponseAbstract $response Response
@@ -63,7 +64,7 @@ final class BackendController extends Controller
     }
 
     /**
-     * Routing end-point for application behaviour.
+     * Routing end-point for application behavior.
      *
      * @param RequestAbstract  $request  Request
      * @param ResponseAbstract $response Response
@@ -98,7 +99,7 @@ final class BackendController extends Controller
     }
 
     /**
-     * Routing end-point for application behaviour.
+     * Routing end-point for application behavior.
      *
      * @param RequestAbstract  $request  Request
      * @param ResponseAbstract $response Response
@@ -125,7 +126,44 @@ final class BackendController extends Controller
 
         $view->data['item'] = $item;
 
-        /** @var \Modules\Labeling\Models\LabelLayout[] $layout */
+        $query   = new Builder($this->app->dbPool->get());
+        $results = $query->raw('SELECT labeling_layout_item_src FROM labeling_layout_item WHERE labeling_layout_item_dst = ' . ((int) $request->getData('id')))
+            ->execute()
+            ?->fetchAll(\PDO::FETCH_COLUMN);
+
+        /** @var \Modules\Labeling\Models\LabelLayout[] $layouts */
+        $layouts = LabelLayoutMapper::getAll()
+            ->with('l11n')
+            ->with('template')
+            ->with('template/sources')
+            ->where('l11n/language', $response->header->l11n->language)
+            ->where('id', $results, 'IN')
+            ->execute();
+
+        $view->data['layouts'] = $layouts;
+
+        return $view;
+    }
+
+    /**
+     * Routing end-point for application behavior.
+     *
+     * @param RequestAbstract  $request  Request
+     * @param ResponseAbstract $response Response
+     * @param array            $data     Generic data
+     *
+     * @return RenderableInterface
+     *
+     * @since 1.0.0
+     * @codeCoverageIgnore
+     */
+    public function viewLayout(RequestAbstract $request, ResponseAbstract $response, array $data = []) : RenderableInterface
+    {
+        $view = new View($this->app->l11nManager, $request, $response);
+        $view->setTemplate('/Modules/Labeling/Theme/Backend/layout-view');
+        $view->data['nav'] = $this->app->moduleManager->get('Navigation')->createNavigationMid(1005701001, $request, $response);
+
+        /** @var \Modules\Labeling\Models\LabelLayout[] $layouts */
         $layout = LabelLayoutMapper::get()
             ->with('l11n')
             ->with('template')

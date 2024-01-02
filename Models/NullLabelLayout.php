@@ -14,17 +14,33 @@ declare(strict_types=1);
 
 namespace Modules\Labeling\Models;
 
-use phpOMS\Stdlib\Base\Enum;
-
 /**
- * Permission category enum.
+ * Null model
  *
  * @package Modules\Labeling\Models
  * @license OMS License 2.0
  * @link    https://jingga.app
  * @since   1.0.0
  */
-abstract class PermissionState extends Enum
+final class NullLabelLayout extends LabelLayout
 {
-    public const LABEL = 1;
+    /**
+     * Constructor
+     *
+     * @param int $id Model id
+     *
+     * @since 1.0.0
+     */
+    public function __construct(int $id = 0)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function jsonSerialize() : mixed
+    {
+        return ['id' => $this->id];
+    }
 }
