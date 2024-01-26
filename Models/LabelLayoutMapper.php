@@ -37,8 +37,8 @@ final class LabelLayoutMapper extends DataMapperFactory
      * @since 1.0.0
      */
     public const COLUMNS = [
-        'labeling_layout_id'                     => ['name' => 'labeling_layout_id',             'type' => 'int',    'internal' => 'id'],
-        'labeling_layout_template'               => ['name' => 'labeling_layout_template',  'type' => 'int',    'internal' => 'template'],
+        'labeling_layout_id'       => ['name' => 'labeling_layout_id',             'type' => 'int',    'internal' => 'id'],
+        'labeling_layout_template' => ['name' => 'labeling_layout_template',  'type' => 'int',    'internal' => 'template'],
     ];
 
     /**
@@ -49,11 +49,11 @@ final class LabelLayoutMapper extends DataMapperFactory
      */
     public const HAS_MANY = [
         'l11n' => [
-            'mapper'            => LabelLayoutL11nMapper::class,
-            'table'             => 'labeling_layout_l11n',
-            'self'              => 'labeling_layout_l11n_type',
-            'column'            => 'content',
-            'external'          => null,
+            'mapper'   => LabelLayoutL11nMapper::class,
+            'table'    => 'labeling_layout_l11n',
+            'self'     => 'labeling_layout_l11n_type',
+            'column'   => 'content',
+            'external' => null,
         ],
     ];
 
@@ -64,9 +64,9 @@ final class LabelLayoutMapper extends DataMapperFactory
      * @since 1.0.0
      */
     public const OWNS_ONE = [
-        'template'  => [
-            'mapper'     => CollectionMapper::class,
-            'external'   => 'labeling_layout_template',
+        'template' => [
+            'mapper'   => CollectionMapper::class,
+            'external' => 'labeling_layout_template',
         ],
     ];
 

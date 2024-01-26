@@ -94,7 +94,10 @@ final class ApiController extends Controller
     private function createLabelLayoutFromRequest(RequestAbstract $request) : LabelLayout
     {
         $labelLayout = new LabelLayout();
-        $labelLayout->setL11n($request->getDataString('title') ?? '', $request->getDataString('language') ?? ISO639x1Enum::_EN);
+        $labelLayout->setL11n(
+            $request->getDataString('title') ?? '',
+            ISO639x1Enum::tryFromValue($request->getDataString('language')) ?? ISO639x1Enum::_EN
+        );
 
         $path          = '/Modules/Labeling/Templates/' . $request->getDataString('title');
         $uploadedFiles = $request->files;
@@ -176,12 +179,10 @@ final class ApiController extends Controller
      */
     private function createLabelLayoutL11nFromRequest(RequestAbstract $request) : BaseStringL11n
     {
-        $labelLayoutL11n      = new BaseStringL11n();
-        $labelLayoutL11n->ref = $request->getDataInt('layout') ?? 0;
-        $labelLayoutL11n->setLanguage(
-            $request->getDataString('language') ?? $request->header->l11n->language
-        );
-        $labelLayoutL11n->content = $request->getDataString('title') ?? '';
+        $labelLayoutL11n           = new BaseStringL11n();
+        $labelLayoutL11n->ref      = $request->getDataInt('layout') ?? 0;
+        $labelLayoutL11n->language = ISO639x1Enum::tryFromValue($request->getDataString('language')) ?? $request->header->l11n->language;
+        $labelLayoutL11n->content  = $request->getDataString('title') ?? '';
 
         return $labelLayoutL11n;
     }

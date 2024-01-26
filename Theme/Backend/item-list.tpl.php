@@ -25,53 +25,53 @@ echo $this->data['nav']->render(); ?>
         <section class="portlet">
             <div class="portlet-head"><?= $this->getHtml('Items', 'ItemManagement', 'Backend'); ?><i class="g-icon download btn end-xs">download</i></div>
             <div class="slider">
-            <table id="iSalesItemList" class="default sticky">
+            <table id="iItemList" class="default sticky">
                 <thead>
                 <tr>
                     <td>
                     <td><?= $this->getHtml('Number', 'ItemManagement', 'Backend'); ?>
-                        <label for="iSalesItemList-sort-1">
-                            <input type="radio" name="iSalesItemList-sort" id="iSalesItemList-sort-1">
+                        <label for="iItemList-sort-1">
+                            <input type="radio" name="iItemList-sort" id="iItemList-sort-1">
                             <i class="sort-asc g-icon">expand_less</i>
                         </label>
-                        <label for="iSalesItemList-sort-2">
-                            <input type="radio" name="iSalesItemList-sort" id="iSalesItemList-sort-2">
+                        <label for="iItemList-sort-2">
+                            <input type="radio" name="iItemList-sort" id="iItemList-sort-2">
                             <i class="sort-desc g-icon">expand_more</i>
                         </label>
                         <label>
                             <i class="filter g-icon">filter_alt</i>
                         </label>
                     <td><?= $this->getHtml('Name', 'ItemManagement', 'Backend'); ?>
-                        <label for="iSalesItemList-sort-3">
-                            <input type="radio" name="iSalesItemList-sort" id="iSalesItemList-sort-3">
+                        <label for="iItemList-sort-3">
+                            <input type="radio" name="iItemList-sort" id="iItemList-sort-3">
                             <i class="sort-asc g-icon">expand_less</i>
                         </label>
-                        <label for="iSalesItemList-sort-4">
-                            <input type="radio" name="iSalesItemList-sort" id="iSalesItemList-sort-4">
+                        <label for="iItemList-sort-4">
+                            <input type="radio" name="iItemList-sort" id="iItemList-sort-4">
                             <i class="sort-desc g-icon">expand_more</i>
                         </label>
                         <label>
                             <i class="filter g-icon">filter_alt</i>
                         </label>
                     <td><?= $this->getHtml('Name', 'ItemManagement', 'Backend'); ?>
-                        <label for="iSalesItemList-sort-5">
-                            <input type="radio" name="iSalesItemList-sort" id="iSalesItemList-sort-5">
+                        <label for="iItemList-sort-5">
+                            <input type="radio" name="iItemList-sort" id="iItemList-sort-5">
                             <i class="sort-asc g-icon">expand_less</i>
                         </label>
-                        <label for="iSalesItemList-sort-6">
-                            <input type="radio" name="iSalesItemList-sort" id="iSalesItemList-sort-6">
+                        <label for="iItemList-sort-6">
+                            <input type="radio" name="iItemList-sort" id="iItemList-sort-6">
                             <i class="sort-desc g-icon">expand_more</i>
                         </label>
                         <label>
                             <i class="filter g-icon">filter_alt</i>
                         </label>
                     <td class="wf-100"><?= $this->getHtml('Name', 'ItemManagement', 'Backend'); ?>
-                        <label for="iSalesItemList-sort-7">
-                            <input type="radio" name="iSalesItemList-sort" id="iSalesItemList-sort-7">
+                        <label for="iItemList-sort-7">
+                            <input type="radio" name="iItemList-sort" id="iItemList-sort-7">
                             <i class="sort-asc g-icon">expand_less</i>
                         </label>
-                        <label for="iSalesItemList-sort-8">
-                            <input type="radio" name="iSalesItemList-sort" id="iSalesItemList-sort-8">
+                        <label for="iItemList-sort-8">
+                            <input type="radio" name="iItemList-sort" id="iItemList-sort-8">
                             <i class="sort-desc g-icon">expand_more</i>
                         </label>
                         <label>

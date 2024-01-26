@@ -25,29 +25,29 @@ echo $this->data['nav']->render(); ?>
         <section class="portlet">
             <div class="portlet-head"><?= $this->getHtml('Layouts'); ?><i class="g-icon download btn end-xs">download</i></div>
             <div class="slider">
-            <table id="iSalesItemList" class="default sticky">
+            <table id="iLayoutList" class="default sticky">
                 <thead>
                 <tr>
                     <td>
                     <td><?= $this->getHtml('ID', '0', '0'); ?>
-                        <label for="iSalesItemList-sort-1">
-                            <input type="radio" name="iSalesItemList-sort" id="iSalesItemList-sort-1">
+                        <label for="iLayoutList-sort-1">
+                            <input type="radio" name="iLayoutList-sort" id="iLayoutList-sort-1">
                             <i class="sort-asc g-icon">expand_less</i>
                         </label>
-                        <label for="iSalesItemList-sort-2">
-                            <input type="radio" name="iSalesItemList-sort" id="iSalesItemList-sort-2">
+                        <label for="iLayoutList-sort-2">
+                            <input type="radio" name="iLayoutList-sort" id="iLayoutList-sort-2">
                             <i class="sort-desc g-icon">expand_more</i>
                         </label>
                         <label>
                             <i class="filter g-icon">filter_alt</i>
                         </label>
                     <td class="wf-100"><?= $this->getHtml('Name'); ?>
-                        <label for="iSalesItemList-sort-1">
-                            <input type="radio" name="iSalesItemList-sort" id="iSalesItemList-sort-1">
+                        <label for="iLayoutList-sort-1">
+                            <input type="radio" name="iLayoutList-sort" id="iLayoutList-sort-1">
                             <i class="sort-asc g-icon">expand_less</i>
                         </label>
-                        <label for="iSalesItemList-sort-2">
-                            <input type="radio" name="iSalesItemList-sort" id="iSalesItemList-sort-2">
+                        <label for="iLayoutList-sort-2">
+                            <input type="radio" name="iLayoutList-sort" id="iLayoutList-sort-2">
                             <i class="sort-desc g-icon">expand_more</i>
                         </label>
                         <label>
@@ -55,7 +55,7 @@ echo $this->data['nav']->render(); ?>
                         </label>
                 <tbody>
                 <?php $count = 0; foreach ($layouts as $key => $value) : ++$count;
-                    $url         = UriFactory::build('{/base}/warehouse/labeling/layout?id=' . $value->id);
+                    $url     = UriFactory::build('{/base}/warehouse/labeling/layout?id=' . $value->id);
                 ?>
                 <tr data-href="<?= $url; ?>">
                     <td>

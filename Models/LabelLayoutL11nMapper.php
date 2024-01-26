@@ -37,10 +37,10 @@ final class LabelLayoutL11nMapper extends DataMapperFactory
      * @since 1.0.0
      */
     public const COLUMNS = [
-        'labeling_layout_l11n_id'        => ['name' => 'labeling_layout_l11n_id',       'type' => 'int',    'internal' => 'id'],
-        'labeling_layout_l11n_name'      => ['name' => 'labeling_layout_l11n_name',    'type' => 'string', 'internal' => 'content', 'autocomplete' => true],
-        'labeling_layout_l11n_type'      => ['name' => 'labeling_layout_l11n_type',      'type' => 'int',    'internal' => 'ref'],
-        'labeling_layout_l11n_language'  => ['name' => 'labeling_layout_l11n_language', 'type' => 'string', 'internal' => 'language'],
+        'labeling_layout_l11n_id'       => ['name' => 'labeling_layout_l11n_id',       'type' => 'int',    'internal' => 'id'],
+        'labeling_layout_l11n_name'     => ['name' => 'labeling_layout_l11n_name',    'type' => 'string', 'internal' => 'content', 'autocomplete' => true],
+        'labeling_layout_l11n_type'     => ['name' => 'labeling_layout_l11n_type',      'type' => 'int',    'internal' => 'ref'],
+        'labeling_layout_l11n_language' => ['name' => 'labeling_layout_l11n_language', 'type' => 'string', 'internal' => 'language'],
     ];
 
     /**
