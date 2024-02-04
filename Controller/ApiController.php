@@ -102,7 +102,7 @@ final class ApiController extends Controller
         $path          = '/Modules/Labeling/Templates/' . $request->getDataString('title');
         $uploadedFiles = $request->files;
 
-        $uploaded = $this->app->moduleManager->get('Media')->uploadFiles(
+        $uploaded = $this->app->moduleManager->get('Media', 'Api')->uploadFiles(
             names: [],
             fileNames: [],
             files: $uploadedFiles,
