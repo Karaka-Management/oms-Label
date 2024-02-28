@@ -29,6 +29,9 @@ use phpOMS\Views\View;
  * @license OMS License 2.0
  * @link    https://jingga.app
  * @since   1.0.0
+ *
+ * @todo Create easy front end label editor (drag and drop, images, textareas, database values, ...)
+ *      https://github.com/Karaka-Management/Karaka/issues/204
  */
 final class BackendController extends Controller
 {
@@ -88,7 +91,7 @@ final class BackendController extends Controller
             ->with('files')
             ->with('files/types')
             ->where('l11n/language', $response->header->l11n->language)
-            ->where('l11n/type/title', ['name1', 'name2', 'name3'], 'IN')
+            ->where('l11n/type/title', ['name1', 'name2'], 'IN')
             ->where('files/types/name', 'item_profile_image')
             ->limit(50)
             ->execute();
@@ -121,7 +124,7 @@ final class BackendController extends Controller
             ->with('l11n/type')
             ->where('id', (int) $request->getData('id'))
             ->where('l11n/language', $response->header->l11n->language)
-            ->where('l11n/type/title', ['name1', 'name2', 'name3'], 'IN')
+            ->where('l11n/type/title', ['name1', 'name2'], 'IN')
             ->execute();
 
         $view->data['item'] = $item;

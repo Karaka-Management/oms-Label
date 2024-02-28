@@ -76,7 +76,7 @@ final class Installer extends InstallerAbstract
         $layoutModels = [];
 
         /** @var \Modules\Labeling\Controller\ApiController $module */
-        $module = $app->moduleManager->getModuleInstance('Labeling');
+        $module = $app->moduleManager->get('Labeling');
 
         $tempPath = __DIR__ . '/../../../temp/';
 

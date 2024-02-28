@@ -53,25 +53,13 @@ echo $this->data['nav']->render(); ?>
                         <label>
                             <i class="filter g-icon">filter_alt</i>
                         </label>
-                    <td><?= $this->getHtml('Name', 'ItemManagement', 'Backend'); ?>
+                    <td class="wf-100"><?= $this->getHtml('Name', 'ItemManagement', 'Backend'); ?>
                         <label for="iItemList-sort-5">
                             <input type="radio" name="iItemList-sort" id="iItemList-sort-5">
                             <i class="sort-asc g-icon">expand_less</i>
                         </label>
                         <label for="iItemList-sort-6">
                             <input type="radio" name="iItemList-sort" id="iItemList-sort-6">
-                            <i class="sort-desc g-icon">expand_more</i>
-                        </label>
-                        <label>
-                            <i class="filter g-icon">filter_alt</i>
-                        </label>
-                    <td class="wf-100"><?= $this->getHtml('Name', 'ItemManagement', 'Backend'); ?>
-                        <label for="iItemList-sort-7">
-                            <input type="radio" name="iItemList-sort" id="iItemList-sort-7">
-                            <i class="sort-asc g-icon">expand_less</i>
-                        </label>
-                        <label for="iItemList-sort-8">
-                            <input type="radio" name="iItemList-sort" id="iItemList-sort-8">
                             <i class="sort-desc g-icon">expand_more</i>
                         </label>
                         <label>
@@ -90,7 +78,6 @@ echo $this->data['nav']->render(); ?>
                     <td><a href="<?= $url; ?>"><?= $this->printHtml($value->number); ?></a>
                     <td><a href="<?= $url; ?>"><?= $this->printHtml($value->getL11n('name1')->content); ?></a>
                     <td><a href="<?= $url; ?>"><?= $this->printHtml($value->getL11n('name2')->content); ?></a>
-                    <td><a href="<?= $url; ?>"><?= $this->printHtml($value->getL11n('name3')->content); ?></a>
                 <?php endforeach; ?>
                 <?php if ($count === 0) : ?>
                     <tr><td colspan="9" class="empty"><?= $this->getHtml('Empty', '0', '0'); ?>
