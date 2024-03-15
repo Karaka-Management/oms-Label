@@ -166,16 +166,13 @@ final class BackendController extends Controller
         $view->setTemplate('/Modules/Labeling/Theme/Backend/layout-view');
         $view->data['nav'] = $this->app->moduleManager->get('Navigation')->createNavigationMid(1005701001, $request, $response);
 
-        /** @var \Modules\Labeling\Models\LabelLayout[] $layouts */
-        $layout = LabelLayoutMapper::get()
+        $view->data['layout'] = LabelLayoutMapper::get()
             ->with('l11n')
             ->with('template')
             ->with('template/sources')
             ->where('l11n/language', $response->header->l11n->language)
             ->where('id', (int) $request->getData('id'))
             ->execute();
-
-        $view->data['layout'] = $layout;
 
         return $view;
     }

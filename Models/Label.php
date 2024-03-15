@@ -222,6 +222,10 @@ class Label
                 // should rotate
                 if ($element->rotate !== 0.0) {
                     $rotated = \imagerotate($in, $element->rotate, $transparency);
+                    if ($rotated === false) {
+                        return null;
+                    }
+
                     \imagealphablending($rotated, false);
                     \imagesavealpha($rotated, true);
 
