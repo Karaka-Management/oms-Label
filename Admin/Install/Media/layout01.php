@@ -12,10 +12,12 @@
  */
 declare(strict_types=1);
 
+use Modules\Admin\Models\ContactType;
 use Modules\Labeling\Models\Image;
 use Modules\Labeling\Models\Label;
 use Modules\Labeling\Models\Shape;
 use Modules\Labeling\Models\Text;
+use phpOMS\Localization\ISO3166NameEnum;
 use phpOMS\Utils\Barcode\Datamatrix;
 use phpOMS\Utils\Barcode\QR;
 
@@ -116,7 +118,7 @@ $text->y       = 610 + $margin;
 $l->elements[] = $text;
 
 $text          = new Text();
-$text->text    = 'DE';
+$text->text    = $unit->mainAddress->country;
 $text->size    = 20;
 $text->x       = $margin + 40;
 $text->y       = 625 + $margin;
@@ -179,28 +181,28 @@ $l->elements[] = $image;
 
 // address
 $text          = new Text();
-$text->text    = 'Jingga e. K.';
+$text->text    = $unit->mainAddress->name;
 $text->size    = 30;
 $text->x       = 150 + $margin;
 $text->y       = 710 + $margin;
 $l->elements[] = $text;
 
 $text          = new Text();
-$text->text    = 'Kirchstr. 33';
+$text->text    = $unit->mainAddress->address;
 $text->size    = 30;
 $text->x       = 150 + $margin;
 $text->y       = 760 + $margin;
 $l->elements[] = $text;
 
 $text          = new Text();
-$text->text    = '61191 Rosbach';
+$text->text    = $unit->mainAddress->postal . ' ' . $unit->mainAddress->city;
 $text->size    = 30;
 $text->x       = 150 + $margin;
 $text->y       = 810 + $margin;
 $l->elements[] = $text;
 
 $text          = new Text();
-$text->text    = 'Germany';
+$text->text    = ISO3166NameEnum::getBy2Code($unit->mainAddress->country);
 $text->size    = 30;
 $text->x       = 150 + $margin;
 $text->y       = 860 + $margin;
@@ -208,21 +210,21 @@ $l->elements[] = $text;
 
 // contact
 $text          = new Text();
-$text->text    = 'www.jingga.app';
+$text->text    = $unit->getContactByType(ContactType::WEBSITE)->content;
 $text->size    = 30;
 $text->x       = 600 + $margin;
 $text->y       = 710 + $margin;
 $l->elements[] = $text;
 
 $text          = new Text();
-$text->text    = 'info@jingga.app';
+$text->text    = $unit->getContactByType(ContactType::EMAIL)->content;
 $text->size    = 30;
 $text->x       = 600 + $margin;
 $text->y       = 760 + $margin;
 $l->elements[] = $text;
 
 $text          = new Text();
-$text->text    = '+49 0123 456789';
+$text->text    = $unit->getContactByType(ContactType::PHONE)->content;
 $text->size    = 30;
 $text->x       = 600 + $margin;
 $text->y       = 810 + $margin;
@@ -245,14 +247,18 @@ $text->y       = 850 + $margin;
 $l->elements[] = $text;
 
 // qr
-$qr = new QR('https://jingga.app', 200, 200);
+$website = $unit->getContactByType(ContactType::WEBSITE)->content;
+$website = empty($website) ? 'https://jingga.app' : $website;
+if (!empty($website)) {
+    $qr = new QR($website, 200, 200);
 
-$image           = new Image();
-$image->resource = $qr->get();
-$image->x        = 1620 + $margin;
-$image->y        = 680 + $margin;
-$image->width    = 180;
-$image->height   = 180;
-$l->elements[]   = $image;
+    $image           = new Image();
+    $image->resource = $qr->get();
+    $image->x        = 1620 + $margin;
+    $image->y        = 680 + $margin;
+    $image->width    = 180;
+    $image->height   = 180;
+    $l->elements[]   = $image;
+}
 
 return $l;

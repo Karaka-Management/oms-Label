@@ -13,4 +13,7 @@
 declare(strict_types=1);
 
 return ['Labeling' => [
+    'Layouts' => 'Layouts',
+    'Layout'  => 'Layout',
+    'Name'    => 'Name',
 ]];

@@ -12,9 +12,15 @@
  */
 declare(strict_types=1);
 
+use Modules\ItemManagement\Models\NullItem;
+
 echo $this->data['nav']->render();
 
 $layout = $this->data['layout'];
+
+// Required by label
+$item = new NullItem();
+$unit = null;
 
 $media    = $layout->template;
 $template = \reset($media->sources);
@@ -33,10 +39,6 @@ $imageType = 'image/png'; // Assuming JPEG format in this example
 $inlineImage = 'data:' . $imageType . ';base64,' . $imageBase64;
 ?>
 
-<div class="row">
-    <div class="col-xs-12 col-md-6">
-        <div class="portlet">
-            <img style="width: 100%" src="<?php echo $inlineImage; ?>" alt="Inline Image">
-        </div>
-    </div>
+<div class="portlet-body">
+    <img height="100%" width="100%" src="Web/Backend/img/under_construction.svg">
 </div>

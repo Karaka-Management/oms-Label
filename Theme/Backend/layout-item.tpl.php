@@ -20,6 +20,7 @@ $media    = $layout->template;
 $template = \reset($media->sources);
 
 $item = $this->data['item'];
+$unit = $this->data['unit'];
 
 $layout = include_once $template->getAbsolutePath();
 
@@ -41,4 +42,13 @@ $inlineImage = 'data:' . $imageType . ';base64,' . $imageBase64;
             <img style="width: 100%" src="<?php echo $inlineImage; ?>" alt="Inline Image">
         </div>
     </div>
+
+    <!--
+    <div class="col-xs-12 col-md-6">
+        <section class="portlet">
+            <div class="portlet-head"></div>
+            <div class="portlet-body"></div>
+        </section>
+    </div>
+    -->
 </div>

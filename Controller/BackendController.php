@@ -16,6 +16,7 @@ namespace Modules\Labeling\Controller;
 
 use Modules\ItemManagement\Models\ItemMapper;
 use Modules\Labeling\Models\LabelLayoutMapper;
+use Modules\Organization\Models\UnitMapper;
 use phpOMS\Contract\RenderableInterface;
 use phpOMS\DataStorage\Database\Query\Builder;
 use phpOMS\Message\RequestAbstract;
@@ -59,7 +60,7 @@ final class BackendController extends Controller
             ->with('template')
             ->with('template/sources')
             ->where('l11n/language', $response->header->l11n->language)
-            ->execute();
+            ->executeGetArray();
 
         $view->data['layouts'] = $layouts;
 
@@ -94,7 +95,7 @@ final class BackendController extends Controller
             ->where('l11n/type/title', ['name1', 'name2'], 'IN')
             ->where('files/types/name', 'item_profile_image')
             ->limit(50)
-            ->execute();
+            ->executeGetArray();
 
         $view->data['items'] = $items;
 
@@ -119,31 +120,37 @@ final class BackendController extends Controller
         $view->setTemplate('/Modules/Labeling/Theme/Backend/layout-item');
         $view->data['nav'] = $this->app->moduleManager->get('Navigation')->createNavigationMid(1005701001, $request, $response);
 
-        $item = ItemMapper::get()
+        $view->data['item'] = ItemMapper::get()
             ->with('l11n')
             ->with('l11n/type')
+            ->with('attributes')
+            ->with('attributes/type')
+            ->with('attributes/value')
             ->where('id', (int) $request->getData('id'))
             ->where('l11n/language', $response->header->l11n->language)
             ->where('l11n/type/title', ['name1', 'name2'], 'IN')
+            ->where('attributes/type/name', ['gtin', 'eu_medical_device_class', 'fda_medical_regulatory_class', 'country_of_origin'], 'IN')
             ->execute();
 
-        $view->data['item'] = $item;
+        $view->data['unit'] = UnitMapper::get()
+            ->with('parent')
+            ->with('mainAddress')
+            ->with('contacts')
+            ->where('id', $this->app->unitId)
+            ->execute();
 
         $query   = new Builder($this->app->dbPool->get());
         $results = $query->raw('SELECT labeling_layout_item_src FROM labeling_layout_item WHERE labeling_layout_item_dst = ' . ((int) $request->getData('id')))
             ->execute()
             ?->fetchAll(\PDO::FETCH_COLUMN);
 
-        /** @var \Modules\Labeling\Models\LabelLayout[] $layouts */
-        $layouts = LabelLayoutMapper::getAll()
+        $view->data['layouts'] = LabelLayoutMapper::getAll()
             ->with('l11n')
             ->with('template')
             ->with('template/sources')
             ->where('l11n/language', $response->header->l11n->language)
             ->where('id', $results, 'IN')
-            ->execute();
-
-        $view->data['layouts'] = $layouts;
+            ->executeGetArray();
 
         return $view;
     }
