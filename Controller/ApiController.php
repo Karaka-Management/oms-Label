@@ -83,7 +83,7 @@ final class ApiController extends Controller
     }
 
     /**
-     * Method to create item attribute from request.
+     * Method to create LabelLayout from request.
      *
      * @param RequestAbstract $request Request
      *
@@ -142,7 +142,7 @@ final class ApiController extends Controller
     }
 
     /**
-     * Api method to create item attribute l11n
+     * Api method to create LabelLayout l11n
      *
      * @param RequestAbstract  $request  Request
      * @param ResponseAbstract $response Response
@@ -169,7 +169,7 @@ final class ApiController extends Controller
     }
 
     /**
-     * Method to create item attribute l11n from request.
+     * Method to create LabelLayout l11n from request.
      *
      * @param RequestAbstract $request Request
      *
@@ -188,7 +188,7 @@ final class ApiController extends Controller
     }
 
     /**
-     * Validate item attribute l11n create request
+     * Validate LabelLayout l11n create request
      *
      * @param RequestAbstract $request Request
      *
