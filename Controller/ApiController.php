@@ -18,7 +18,6 @@ namespace Modules\Labeling\Controller;
 use Modules\Labeling\Models\LabelLayout;
 use Modules\Labeling\Models\LabelLayoutL11nMapper;
 use Modules\Labeling\Models\LabelLayoutMapper;
-use Modules\Media\Models\CollectionMapper;
 use phpOMS\Localization\BaseStringL11n;
 use phpOMS\Localization\ISO639x1Enum;
 use phpOMS\Message\Http\RequestStatusCode;
@@ -59,7 +58,12 @@ final class ApiController extends Controller
 
         $layout = $this->createLabelLayoutFromRequest($request);
         $this->createModel($request->header->account, $layout, LabelLayoutMapper::class, 'layout', $request->getOrigin());
-        $this->createStandardCreateResponse($request, $response, $layout);
+
+        $old = clone $layout;
+        $new = $this->uploadLayoutTemplate($layout, $request);
+        $this->updateModel($request->header->account, $old, $new, LabelLayoutMapper::class, 'layout', $request->getOrigin());
+
+        $this->createStandardCreateResponse($request, $response, $new);
     }
 
     /**
@@ -82,6 +86,22 @@ final class ApiController extends Controller
         return [];
     }
 
+    private function uploadLayoutTemplate(LabelLayout $layout, RequestAbstract $request) : LabelLayout
+    {
+        $path = '/Modules/Labeling/Templates/' . $layout->id;
+
+        $layout->template = $this->app->moduleManager->get('Media', 'Api')->uploadFiles(
+            names: [],
+            fileNames: [],
+            files: $request->files,
+            account: $request->header->account,
+            basePath: __DIR__ . '/../../../Modules/Media/Files' . $path,
+            virtualPath: $path
+        );
+
+        return $layout;
+    }
+
     /**
      * Method to create LabelLayout from request.
      *
@@ -98,45 +118,6 @@ final class ApiController extends Controller
             $request->getDataString('title') ?? '',
             ISO639x1Enum::tryFromValue($request->getDataString('language')) ?? ISO639x1Enum::_EN
         );
-
-        $path          = '/Modules/Labeling/Templates/' . $request->getDataString('title');
-        $uploadedFiles = $request->files;
-
-        $uploaded = $this->app->moduleManager->get('Media', 'Api')->uploadFiles(
-            names: [],
-            fileNames: [],
-            files: $uploadedFiles,
-            account: $request->header->account,
-            basePath: __DIR__ . '/../../../Modules/Media/Files' . $path,
-            virtualPath: $path,
-        );
-
-        $collection = $this->app->moduleManager->get('Media')->createRecursiveMediaCollection(
-            $path,
-            $request->header->account,
-            __DIR__ . '/../../../Modules/Media/Files' . $path
-        );
-
-        // @todo I think we need to add the uploaded files to the collection.
-        // The frontend should work without it because of some "smart" corrections (virtualPath), but it is not correct.
-        // In the db there should be a relationship defined, no?
-        // If that is the case, maybe we also need to adjust the api. Either the uploadFiles should create the collection (if specified)
-        // or the createRecursiveMediaCollection should have another parameter with all the files it should include.
-        // If that is the case we also need to fix many modules who are not creating a specifc collection/upload relation (News, Kanban, ....).
-
-        foreach ($uploaded as $file) {
-            $this->createModelRelation(
-                $request->header->account,
-                $collection->id,
-                $file->id,
-                CollectionMapper::class,
-                'sources',
-                '',
-                $request->getOrigin()
-            );
-        }
-
-        $labelLayout->template = $collection;
 
         return $labelLayout;
     }
