@@ -19,6 +19,7 @@ use Modules\Labeling\Models\LabelLayoutMapper;
 use Modules\Organization\Models\UnitMapper;
 use phpOMS\Contract\RenderableInterface;
 use phpOMS\DataStorage\Database\Query\Builder;
+use phpOMS\Message\Http\RequestStatusCode;
 use phpOMS\Message\RequestAbstract;
 use phpOMS\Message\ResponseAbstract;
 use phpOMS\Views\View;
@@ -174,8 +175,6 @@ final class BackendController extends Controller
     public function viewLayout(RequestAbstract $request, ResponseAbstract $response, array $data = []) : RenderableInterface
     {
         $view = new View($this->app->l11nManager, $request, $response);
-        $view->setTemplate('/Modules/Labeling/Theme/Backend/layout-view');
-        $view->data['nav'] = $this->app->moduleManager->get('Navigation')->createNavigationMid(1005701001, $request, $response);
 
         $view->data['layout'] = LabelLayoutMapper::get()
             ->with('l11n')
@@ -184,6 +183,16 @@ final class BackendController extends Controller
             ->where('l11n/language', $response->header->l11n->language)
             ->where('id', (int) $request->getData('id'))
             ->execute();
+
+        if ($view->data['layout']->id === 0) {
+            $response->header->status = RequestStatusCode::R_404;
+            $view->setTemplate('/Web/Backend/Error/404');
+
+            return $view;
+        }
+
+        $view->setTemplate('/Modules/Labeling/Theme/Backend/layout-view');
+        $view->data['nav'] = $this->app->moduleManager->get('Navigation')->createNavigationMid(1005701001, $request, $response);
 
         return $view;
     }
