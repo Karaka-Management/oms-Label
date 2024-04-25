@@ -207,7 +207,7 @@ $text->y       = 810 + $margin;
 $l->elements[] = $text;
 
 $text          = new Text();
-$text->text    = ISO3166NameEnum::getBy2Code($unit->mainAddress->country);
+$text->text    = (string) ISO3166NameEnum::getBy2Code($unit->mainAddress->country);
 $text->size    = 30;
 $text->x       = 150 + $margin;
 $text->y       = 860 + $margin;
