@@ -86,6 +86,16 @@ final class ApiController extends Controller
         return [];
     }
 
+    /**
+     * Update the layout template
+     *
+     * @param LabelLayout     $layout  Label layout
+     * @param RequestAbstract $request Request
+     *
+     * @return LabelLayout
+     *
+     * @since 1.0.0
+     */
     private function uploadLayoutTemplate(LabelLayout $layout, RequestAbstract $request) : LabelLayout
     {
         $path = '/Modules/Labeling/Templates/' . $layout->id;
