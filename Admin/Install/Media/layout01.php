@@ -17,6 +17,7 @@ use Modules\Labeling\Models\Image;
 use Modules\Labeling\Models\Label;
 use Modules\Labeling\Models\Shape;
 use Modules\Labeling\Models\Text;
+use Modules\Organization\Models\NullUnit;
 use phpOMS\Localization\ISO3166NameEnum;
 use phpOMS\Utils\Barcode\Datamatrix;
 use phpOMS\Utils\Barcode\QR;
@@ -24,6 +25,10 @@ use phpOMS\Utils\Barcode\QR;
 $margin = 50;
 
 $l = new Label();
+
+if (!isset($unit)) {
+    $unit = new NullUnit();
+}
 
 /** @var \Modules\ItemManagement\Models\Item $item */
 
