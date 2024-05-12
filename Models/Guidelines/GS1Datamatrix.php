@@ -564,7 +564,7 @@ class GS1Datamatrix
         }
 
         foreach ($this->data as $ai => $value) {
-            if (\preg_match(self::DEFINITIONS[$ai]['pattern'], $ai . $value) === false) {
+            if (\preg_match(self::DEFINITIONS[$ai]['pattern'], $ai . $value) !== 1) {
                 return false;
             }
         }

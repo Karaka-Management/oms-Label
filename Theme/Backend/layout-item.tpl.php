@@ -38,9 +38,9 @@ $inlineImage = 'data:' . $imageType . ';base64,' . $imageBase64;
 
 <div class="row">
     <div class="col-xs-12 col-md-6">
-        <div class="portlet">
+        <section class="portlet">
             <img style="width: 100%" src="<?php echo $inlineImage; ?>" alt="Inline Image">
-        </div>
+        </section>
     </div>
 
     <!--

@@ -91,10 +91,10 @@ final class BackendController extends Controller
             ->with('l11n')
             ->with('l11n/type')
             ->with('files')
-            ->with('files/types')
+            ->with('files/tags')
             ->where('l11n/language', $response->header->l11n->language)
             ->where('l11n/type/title', ['name1', 'name2'], 'IN')
-            ->where('files/types/name', 'item_profile_image')
+            ->where('files/tags/name', 'profile_image')
             ->limit(50)
             ->executeGetArray();
 
