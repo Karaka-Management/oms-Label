@@ -6,7 +6,7 @@
  *
  * @package   Modules\Labeling\Models
  * @copyright Dennis Eichhorn
- * @license   OMS License 2.0
+ * @license   OMS License 2.2
  * @version   1.0.0
  * @link      https://jingga.app
  * @see       https://www.gs1.org/standards/gs1-datamatrix-guideline/25#2-Encoding-data+2-2-GS1-element-strings
@@ -20,7 +20,7 @@ namespace Modules\Labeling\Models\Guidelines;
  * GS1 Datamatrix.
  *
  * @package Modules\Labeling\Models
- * @license OMS License 2.0
+ * @license OMS License 2.2
  * @link    https://jingga.app
  * @since   1.0.0
  */
