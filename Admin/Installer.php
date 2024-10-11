@@ -85,7 +85,7 @@ final class Installer extends InstallerAbstract
             $request  = new HttpRequest();
 
             $request->header->account = 1;
-            $request->setData('title', \reset($layout['l11n']));
+            $request->setData('content', \reset($layout['l11n']));
             $request->setData('template', $layout);
 
             foreach ($layout['files'] as $file) {
@@ -125,9 +125,9 @@ final class Installer extends InstallerAbstract
                 $request  = new HttpRequest();
 
                 $request->header->account = 1;
-                $request->setData('title', $l11n);
+                $request->setData('content', $l11n);
                 $request->setData('language', $language);
-                $request->setData('type', $layoutModel['id']);
+                $request->setData('ref', $layoutModel['id']);
 
                 $module->apiLabelLayoutL11nCreate($request, $response);
             }

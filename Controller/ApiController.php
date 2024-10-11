@@ -78,7 +78,7 @@ final class ApiController extends Controller
     private function validateLabelLayoutCreate(RequestAbstract $request) : array
     {
         $val = [];
-        if (($val['title'] = !$request->hasData('title'))
+        if (($val['content'] = !$request->hasData('content'))
         ) {
             return $val;
         }
@@ -125,7 +125,7 @@ final class ApiController extends Controller
     {
         $labelLayout = new LabelLayout();
         $labelLayout->setL11n(
-            $request->getDataString('title') ?? '',
+            $request->getDataString('content') ?? '',
             ISO639x1Enum::tryFromValue($request->getDataString('language')) ?? ISO639x1Enum::_EN
         );
 
@@ -171,9 +171,9 @@ final class ApiController extends Controller
     private function createLabelLayoutL11nFromRequest(RequestAbstract $request) : BaseStringL11n
     {
         $labelLayoutL11n           = new BaseStringL11n();
-        $labelLayoutL11n->ref      = $request->getDataInt('layout') ?? 0;
+        $labelLayoutL11n->ref      = $request->getDataInt('ref') ?? 0;
         $labelLayoutL11n->language = ISO639x1Enum::tryFromValue($request->getDataString('language')) ?? $request->header->l11n->language;
-        $labelLayoutL11n->content  = $request->getDataString('title') ?? '';
+        $labelLayoutL11n->content  = $request->getDataString('content') ?? '';
 
         return $labelLayoutL11n;
     }
